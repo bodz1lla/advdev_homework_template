@@ -37,6 +37,9 @@ podTemplate(
       // Set the tag for the production image: version
       def prodTag = "${version}"
 
+      def devProject = "${GUID}-tasks-dev"
+      def prodProject = "${GUID}-tasks-prod"
+
       // Using Maven build the war file
       // Do not run tests in this step
       stage('Build war') {
@@ -69,8 +72,8 @@ podTemplate(
       // Build the OpenShift Image in OpenShift and tag it.
       stage('Build and Tag OpenShift Image') {
         echo "Building OpenShift container image tasks:${devTag}"
-
-        // TBD: Build Image, tag Image
+        sh "oc start-build tasks --from-file='./target/openshift-tasks.war' --follow -n ${devProject}"
+        sh "oc tag tasks:latest tasks:${devTag} -n ${devProject}"
       }
 
       // Deploy the built image to the Development Environment.
