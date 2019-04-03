@@ -59,14 +59,14 @@ podTemplate(
       // Using Maven to call SonarQube for Code Analysis
           stage('Code Analysis') {
             echo "Running Code Analysis"
-            sh "${mvnCmd} sonar:sonar -Dsonar.host.url=http://sonarqube.gpte-hw-cicd.svc.cluster.local:9000"
+            sh "${mvnCmd} sonar:sonar -Dsonar.host.url=http://999b-sonarqube.svc.cluster.local:9000"
           }
       //   )
       // }
       // Publish the built war file to Nexus
       stage('Publish to Nexus') {
         echo "Publish to Nexus"
-        sh "${mvnCmd} war:war deploy:deploy -DaltDeploymentRepository=nexus::default::http://nexus3.gpte-hw-cicd.svc.cluster.local:8081/repository/releases/"
+        sh "${mvnCmd} war:war deploy:deploy -DaltDeploymentRepository=nexus::default::http://999b-nexus.svc.cluster.local:8081/repository/releases/"
       }
 
       // Build the OpenShift Image in OpenShift and tag it.
