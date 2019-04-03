@@ -12,7 +12,7 @@
     <server>
       <id>nexus</id>
       <username>admin</username>
-      <password>redhat</password>
+      <password>admin123</password>
     </server>
   </servers>
 </settings>
