@@ -72,8 +72,8 @@ podTemplate(
       // Build the OpenShift Image in OpenShift and tag it.
       stage('Build and Tag OpenShift Image') {
         echo "Building OpenShift container image tasks:${devTag}"
-        sh "oc start-build pipeline --from-file='./target/openshift-tasks.war' --follow -n ${devProject}"
-        sh "oc tag pipeline:latest pipeline:${devTag} -n ${devProject}"
+        sh "oc start-build tasks --from-file='./target/openshift-tasks.war' --follow -n ${devProject}"
+        sh "oc tag tasks:latest tasks:${devTag} -n ${devProject}"
       }
 
       // Deploy the built image to the Development Environment.
